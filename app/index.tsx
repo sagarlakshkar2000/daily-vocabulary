@@ -8,16 +8,18 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
-import { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
-import { ActionButtons } from './components/vocabulary/ActionButtons';
-import { ProgressIndicator } from './components/vocabulary/ProgressIndicator';
-import { SwipeHint } from './components/vocabulary/SwipeHint';
-import { VocabularyCard } from './components/vocabulary/VocabularyCard';
+import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import { ActionButtons } from '../components/vocabulary/ActionButtons';
+import { ProgressIndicator } from '../components/vocabulary/ProgressIndicator';
+import { SwipeHint } from '../components/vocabulary/SwipeHint';
+import { VocabularyCard } from '../components/vocabulary/VocabularyCard';
 
 export default function Index() {
   const { backgroundColor } = useBackgroundColor();
   const { current, index, isAnimating, nextWord, prevWord, progress, total } = useVocabulary();
+
   const { speakWord, speakMeaning, speakFull } = useSpeech();
+
   const {
     isFavorited,
     isBookmarked,
@@ -28,35 +30,68 @@ export default function Index() {
     shareWord,
   } = useUserActions();
 
+  // ✅ Prevent multiple fast swipes
+  const isTransitioning = React.useRef(false);
+
+  const handleNext = React.useCallback(() => {
+    if (isTransitioning.current || isAnimating) return;
+
+    isTransitioning.current = true;
+    nextWord();
+
+    requestAnimationFrame(() => {
+      isTransitioning.current = false;
+    });
+  }, [nextWord, isAnimating]);
+
+  const handlePrev = React.useCallback(() => {
+    if (isTransitioning.current) return;
+    isTransitioning.current = true;
+
+    prevWord();
+
+    setTimeout(() => {
+      isTransitioning.current = false;
+    }, 350);
+  }, [prevWord, isAnimating]);
+
   const { gesture, translateY } = useSwipeGesture({
-    onSwipeUp: nextWord,
-    onSwipeDown: prevWord,
-    isEnabled: !isAnimating,
+    onSwipeUp: handleNext,
+    onSwipeDown: handlePrev,
+    isEnabled: !isAnimating && !!current
   });
 
+  // ✅ Safe animation
   const animatedStyle = useAnimatedStyle(() => {
+    const clampedY = Math.max(
+      -SCREEN_HEIGHT / 3,
+      Math.min(translateY.value, SCREEN_HEIGHT / 3)
+    );
+
     const scale = interpolate(
-      Math.abs(translateY.value),
-      [0, SCREEN_HEIGHT / 2],
-      [1, 0.85],
-      Extrapolate.CLAMP
-    );
-    const opacity = interpolate(
-      Math.abs(translateY.value),
+      Math.abs(clampedY),
       [0, SCREEN_HEIGHT / 3],
-      [1, 0.6],
+      [1, 0.9],
       Extrapolate.CLAMP
     );
+
+    const opacity = interpolate(
+      Math.abs(clampedY),
+      [0, SCREEN_HEIGHT / 3],
+      [1, 0.7],
+      Extrapolate.CLAMP
+    );
+
     const rotateX = interpolate(
-      translateY.value,
-      [-SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT / 2],
-      [-15, 0, 15],
+      clampedY,
+      [-SCREEN_HEIGHT / 3, 0, SCREEN_HEIGHT / 3],
+      [-10, 0, 10],
       Extrapolate.CLAMP
     );
 
     return {
       transform: [
-        { translateY: translateY.value },
+        { translateY: clampedY },
         { scale },
         { rotateX: `${rotateX}deg` },
       ],
@@ -64,43 +99,47 @@ export default function Index() {
     };
   });
 
-  if (!current) return null;
+  // ✅ Safe guard
+  if (!current?.word || !current?.meaning) return null;
 
   return (
-    <GestureDetector gesture={gesture}>
-      <View style={[styles.container, { backgroundColor: backgroundColor.color }]}>
-        <StatusBar style="light" />
+    <View style={{ flex: 1 }}>
+      <GestureDetector gesture={gesture}>
+        <View style={[styles.container, { backgroundColor: backgroundColor.color }]}>
+          <StatusBar style="light" />
 
-        <VocabularyCard
-          selectedThemeColor={backgroundColor}
-          item={current}
-          animatedStyle={animatedStyle}
-          onSpeakWord={() => speakWord(current.word)}
-          onSpeakMeaning={() => speakMeaning(current.meaning)}
-          onSpeakFull={() => speakFull(current.word, current.meaning)}
-        />
+          <Animated.View style={animatedStyle}>
+            <VocabularyCard
+              item={current}
+              selectedTheme={backgroundColor}
+              onSpeakWord={() => speakWord(current.word)}
+              onSpeakMeaning={() => speakMeaning(current.meaning)}
+              onSpeakFull={() => speakFull(current.word, current.meaning)}
+            />
+          </Animated.View>
 
-        <View style={styles.bottomControls}>
-          <ActionButtons
-            isFavorited={isFavorited}
-            isBookmarked={isBookmarked}
-            heartScale={heartScale}
-            bookmarkScale={bookmarkScale}
-            onLike={toggleFavorite}
-            onBookmark={toggleBookmark}
-            onShare={() => shareWord(current.word, current.meaning)}
-          />
+          <View style={styles.bottomControls}>
+            <ActionButtons
+              isFavorited={isFavorited}
+              isBookmarked={isBookmarked}
+              heartScale={heartScale}
+              bookmarkScale={bookmarkScale}
+              onLike={toggleFavorite}
+              onBookmark={toggleBookmark}
+              onShare={() => shareWord(current.word, current.meaning)}
+            />
 
-          <ProgressIndicator
-            current={index}
-            total={total}
-            progress={progress}
-          />
+            <ProgressIndicator
+              current={index}
+              total={total}
+              progress={progress}
+            />
+          </View>
+
+          <SwipeHint />
         </View>
-
-        <SwipeHint />
-      </View>
-    </GestureDetector>
+      </GestureDetector>
+    </View>
   );
 }
 

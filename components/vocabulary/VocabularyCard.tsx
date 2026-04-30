@@ -17,13 +17,13 @@ import Animated, {
 const { width } = Dimensions.get('window');
 
 interface VocabularyCardProps {
-  selectedThemeColor: { name: string, color: string, gradient: [string, string], text: string };
+  selectedTheme: { name: string, color: string, gradient: [string, string], text: string };
   item: VocabItem;
   animatedStyle: any;
 }
 
 export const VocabularyCard: React.FC<VocabularyCardProps> = ({
-  selectedThemeColor,
+  selectedTheme,
   item,
   animatedStyle,
 }) => {
@@ -97,9 +97,9 @@ export const VocabularyCard: React.FC<VocabularyCardProps> = ({
 
   return (
     <Animated.View style={[styles.wrapper, animatedStyle]}>
-      <Card style={{ ...styles.card, borderColor: selectedThemeColor.color }} elevation={0}>
+      <Card style={{ ...styles.card, borderColor: selectedTheme.color }} elevation={0}>
         <LinearGradient
-          colors={[selectedThemeColor.color, '#F8F9FA']}
+          colors={[selectedTheme.color, '#F8F9FA']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.gradient}
