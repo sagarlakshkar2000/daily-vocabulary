@@ -1,0 +1,1186 @@
+{
+  "DAILY_VOCABS": [
+    {
+      "word": "hello",
+      "meaning": "a greeting when you meet someone",
+      "example": "Hello, how are you today?",
+      "level": "easy"
+    },
+    {
+      "word": "thank",
+      "meaning": "to show you are grateful",
+      "example": "Thank you for helping me.",
+      "level": "easy"
+    },
+    {
+      "word": "please",
+      "meaning": "a polite word to make a request",
+      "example": "Please pass the salt.",
+      "level": "easy"
+    },
+    {
+      "word": "yes",
+      "meaning": "used to agree or say something is true",
+      "example": "Yes, I like coffee.",
+      "level": "easy"
+    },
+    {
+      "word": "no",
+      "meaning": "used to disagree or say something is not true",
+      "example": "No, I do not want tea.",
+      "level": "easy"
+    },
+    {
+      "word": "water",
+      "meaning": "clear liquid we drink to stay alive",
+      "example": "I drink water every day.",
+      "level": "easy"
+    },
+    {
+      "word": "food",
+      "meaning": "things we eat to get energy",
+      "example": "We need food to live.",
+      "level": "easy"
+    },
+    {
+      "word": "house",
+      "meaning": "a building where people live",
+      "example": "My house is near the park.",
+      "level": "easy"
+    },
+    {
+      "word": "friend",
+      "meaning": "a person you like and trust",
+      "example": "She is my best friend.",
+      "level": "easy"
+    },
+    {
+      "word": "family",
+      "meaning": "people related to you like parents and siblings",
+      "example": "I love my family very much.",
+      "level": "easy"
+    },
+    {
+      "word": "work",
+      "meaning": "activity done to earn money or get things done",
+      "example": "I go to work in the morning.",
+      "level": "easy"
+    },
+    {
+      "word": "school",
+      "meaning": "place where children learn",
+      "example": "My son goes to school by bus.",
+      "level": "easy"
+    },
+    {
+      "word": "time",
+      "meaning": "how we measure minutes, hours and days",
+      "example": "What time is it now?",
+      "level": "easy"
+    },
+    {
+      "word": "day",
+      "meaning": "period of 24 hours from morning to night",
+      "example": "Today is a sunny day.",
+      "level": "easy"
+    },
+    {
+      "word": "night",
+      "meaning": "time when it is dark outside",
+      "example": "I sleep at night.",
+      "level": "easy"
+    },
+    {
+      "word": "eat",
+      "meaning": "to put food in your mouth and swallow",
+      "example": "We eat breakfast at 8 o'clock.",
+      "level": "easy"
+    },
+    {
+      "word": "drink",
+      "meaning": "to take liquid into your mouth",
+      "example": "I drink milk every morning.",
+      "level": "easy"
+    },
+    {
+      "word": "sleep",
+      "meaning": "to rest with eyes closed and not aware",
+      "example": "I sleep for eight hours.",
+      "level": "easy"
+    },
+    {
+      "word": "walk",
+      "meaning": "to move on foot",
+      "example": "I walk to the market.",
+      "level": "easy"
+    },
+    {
+      "word": "talk",
+      "meaning": "to speak with someone",
+      "example": "We talk on the phone daily.",
+      "level": "easy"
+    },
+    {
+      "word": "happy",
+      "meaning": "feeling good and pleased",
+      "example": "I feel happy when I see my friends.",
+      "level": "easy"
+    },
+    {
+      "word": "sad",
+      "meaning": "feeling unhappy",
+      "example": "She looks sad today.",
+      "level": "easy"
+    },
+    {
+      "word": "big",
+      "meaning": "large in size",
+      "example": "This is a big house.",
+      "level": "easy"
+    },
+    {
+      "word": "small",
+      "meaning": "little in size",
+      "example": "I have a small bag.",
+      "level": "easy"
+    },
+    {
+      "word": "hot",
+      "meaning": "having high temperature",
+      "example": "The soup is hot.",
+      "level": "easy"
+    },
+    {
+      "word": "cold",
+      "meaning": "having low temperature",
+      "example": "It is cold outside.",
+      "level": "easy"
+    },
+    {
+      "word": "buy",
+      "meaning": "to get something by paying money",
+      "example": "I buy vegetables from the market.",
+      "level": "medium"
+    },
+    {
+      "word": "sell",
+      "meaning": "to give something in exchange for money",
+      "example": "They sell fruits here.",
+      "level": "medium"
+    },
+    {
+      "word": "money",
+      "meaning": "coins and notes used to buy things",
+      "example": "I need money to buy a ticket.",
+      "level": "medium"
+    },
+    {
+      "word": "morning",
+      "meaning": "early part of the day",
+      "example": "Good morning everyone!",
+      "level": "medium"
+    },
+    {
+      "word": "evening",
+      "meaning": "late part of the day",
+      "example": "We meet in the evening.",
+      "level": "medium"
+    },
+    {
+      "word": "week",
+      "meaning": "seven days together",
+      "example": "I work five days a week.",
+      "level": "medium"
+    },
+    {
+      "word": "month",
+      "meaning": "about 30 days",
+      "example": "My birthday is next month.",
+      "level": "medium"
+    },
+    {
+      "word": "year",
+      "meaning": "365 days or 12 months",
+      "example": "I will visit next year.",
+      "level": "medium"
+    },
+    {
+      "word": "help",
+      "meaning": "to make something easier for someone",
+      "example": "Can you help me please?",
+      "level": "medium"
+    },
+    {
+      "word": "need",
+      "meaning": "must have something",
+      "example": "I need a new phone.",
+      "level": "medium"
+    },
+    {
+      "word": "want",
+      "meaning": "to wish for something",
+      "example": "I want to eat pizza.",
+      "level": "medium"
+    },
+    {
+      "word": "like",
+      "meaning": "to enjoy or find good",
+      "example": "I like this song.",
+      "level": "medium"
+    },
+    {
+      "word": "love",
+      "meaning": "to care about someone very much",
+      "example": "I love my parents.",
+      "level": "medium"
+    },
+    {
+      "word": "know",
+      "meaning": "to have information about something",
+      "example": "Do you know the answer?",
+      "level": "medium"
+    },
+    {
+      "word": "think",
+      "meaning": "to use your mind",
+      "example": "I think it will rain.",
+      "level": "medium"
+    },
+    {
+      "word": "see",
+      "meaning": "to notice with your eyes",
+      "example": "I can see the mountains.",
+      "level": "medium"
+    },
+    {
+      "word": "hear",
+      "meaning": "to receive sound with ears",
+      "example": "Can you hear the music?",
+      "level": "medium"
+    },
+    {
+      "word": "speak",
+      "meaning": "to say words",
+      "example": "She can speak three languages.",
+      "level": "medium"
+    },
+    {
+      "word": "read",
+      "meaning": "to look at and understand written words",
+      "example": "I read books every night.",
+      "level": "medium"
+    },
+    {
+      "word": "write",
+      "meaning": "to put words on paper or screen",
+      "example": "Please write your name.",
+      "level": "medium"
+    },
+    {
+      "word": "home",
+      "meaning": "place where you live with family",
+      "example": "I am going home now.",
+      "level": "medium"
+    },
+    {
+      "word": "city",
+      "meaning": "large town with many people",
+      "example": "Mumbai is a big city.",
+      "level": "medium"
+    },
+    {
+      "word": "road",
+      "meaning": "way for cars and people to travel",
+      "example": "The road is busy today.",
+      "level": "medium"
+    },
+    {
+      "word": "car",
+      "meaning": "vehicle with four wheels",
+      "example": "My car is red.",
+      "level": "medium"
+    },
+    {
+      "word": "bus",
+      "meaning": "large vehicle for many passengers",
+      "example": "I take the bus to office.",
+      "level": "medium"
+    },
+    {
+      "word": "train",
+      "meaning": "long vehicle that runs on rails",
+      "example": "The train arrives at 9 am.",
+      "level": "medium"
+    },
+    {
+      "word": "shop",
+      "meaning": "place where you buy things",
+      "example": "I go to the shop for milk.",
+      "level": "medium"
+    },
+    {
+      "word": "market",
+      "meaning": "place where people buy and sell goods",
+      "example": "The market is open on Sundays.",
+      "level": "medium"
+    },
+    {
+      "word": "doctor",
+      "meaning": "person who helps sick people",
+      "example": "The doctor gave me medicine.",
+      "level": "medium"
+    },
+    {
+      "word": "teacher",
+      "meaning": "person who helps you learn",
+      "example": "My teacher is very kind.",
+      "level": "medium"
+    },
+    {
+      "word": "student",
+      "meaning": "person who learns at school",
+      "example": "He is a good student.",
+      "level": "medium"
+    },
+    {
+      "word": "office",
+      "meaning": "place where people work",
+      "example": "I work in an office.",
+      "level": "medium"
+    },
+    {
+      "word": "meeting",
+      "meaning": "when people come together to talk",
+      "example": "We have a meeting at 11.",
+      "level": "medium"
+    },
+    {
+      "word": "lunch",
+      "meaning": "meal eaten in the middle of the day",
+      "example": "I eat lunch at 1 pm.",
+      "level": "medium"
+    },
+    {
+      "word": "dinner",
+      "meaning": "main meal eaten in the evening",
+      "example": "We have dinner together.",
+      "level": "medium"
+    },
+    {
+      "word": "breakfast",
+      "meaning": "first meal of the day",
+      "example": "Breakfast is ready.",
+      "level": "medium"
+    },
+    {
+      "word": "weather",
+      "meaning": "how the air and sky feel outside",
+      "example": "The weather is nice today.",
+      "level": "medium"
+    },
+    {
+      "word": "rain",
+      "meaning": "water falling from clouds",
+      "example": "It will rain tomorrow.",
+      "level": "medium"
+    },
+    {
+      "word": "sun",
+      "meaning": "bright star that gives us light and heat",
+      "example": "The sun is shining.",
+      "level": "medium"
+    },
+    {
+      "word": "moon",
+      "meaning": "bright object we see in the night sky",
+      "example": "The moon is full tonight.",
+      "level": "medium"
+    },
+    {
+      "word": "book",
+      "meaning": "pages with words and pictures",
+      "example": "I am reading a good book.",
+      "level": "medium"
+    },
+    {
+      "word": "phone",
+      "meaning": "device to call and send messages",
+      "example": "My phone is ringing.",
+      "level": "medium"
+    },
+    {
+      "word": "computer",
+      "meaning": "machine used for work and internet",
+      "example": "I use my computer daily.",
+      "level": "medium"
+    },
+    {
+      "word": "music",
+      "meaning": "sounds that are nice to hear",
+      "example": "I listen to music while cooking.",
+      "level": "medium"
+    },
+    {
+      "word": "movie",
+      "meaning": "story shown on screen",
+      "example": "We watched a movie yesterday.",
+      "level": "medium"
+    },
+    {
+      "word": "game",
+      "meaning": "activity for fun or competition",
+      "example": "Children play games in the park.",
+      "level": "medium"
+    },
+    {
+      "word": "park",
+      "meaning": "open green area for walking and playing",
+      "example": "We go to the park on weekends.",
+      "level": "medium"
+    },
+    {
+      "word": "garden",
+      "meaning": "place with flowers and plants",
+      "example": "She grows vegetables in her garden.",
+      "level": "medium"
+    },
+    {
+      "word": "kitchen",
+      "meaning": "room where food is cooked",
+      "example": "My mother is in the kitchen.",
+      "level": "medium"
+    },
+    {
+      "word": "bathroom",
+      "meaning": "room for washing and bathing",
+      "example": "The bathroom is clean.",
+      "level": "medium"
+    },
+    {
+      "word": "bedroom",
+      "meaning": "room where you sleep",
+      "example": "My bedroom is upstairs.",
+      "level": "medium"
+    },
+    {
+      "word": "table",
+      "meaning": "furniture with flat top and legs",
+      "example": "Put the plates on the table.",
+      "level": "medium"
+    },
+    {
+      "word": "chair",
+      "meaning": "furniture to sit on",
+      "example": "Please sit on the chair.",
+      "level": "medium"
+    },
+    {
+      "word": "door",
+      "meaning": "something you open to enter a room",
+      "example": "Close the door please.",
+      "level": "medium"
+    },
+    {
+      "word": "window",
+      "meaning": "opening in wall to let light and air",
+      "example": "Open the window for fresh air.",
+      "level": "medium"
+    },
+    {
+      "word": "clothes",
+      "meaning": "things you wear on your body",
+      "example": "I wash my clothes on Sunday.",
+      "level": "medium"
+    },
+    {
+      "word": "shoes",
+      "meaning": "covering for your feet",
+      "example": "These shoes are comfortable.",
+      "level": "medium"
+    },
+    {
+      "word": "bag",
+      "meaning": "container to carry things",
+      "example": "I carry my lunch in this bag.",
+      "level": "medium"
+    },
+    {
+      "word": "key",
+      "meaning": "metal object to open locks",
+      "example": "I lost my house key.",
+      "level": "medium"
+    },
+    {
+      "word": "watch",
+      "meaning": "small clock worn on wrist",
+      "example": "My watch shows correct time.",
+      "level": "medium"
+    },
+    {
+      "word": "clock",
+      "meaning": "device that shows time",
+      "example": "The clock is on the wall.",
+      "level": "medium"
+    },
+    {
+      "word": "picture",
+      "meaning": "image or drawing",
+      "example": "There is a beautiful picture on the wall.",
+      "level": "medium"
+    },
+    {
+      "word": "color",
+      "meaning": "red, blue, green etc.",
+      "example": "What is your favorite color?",
+      "level": "medium"
+    },
+    {
+      "word": "number",
+      "meaning": "symbol used for counting",
+      "example": "My phone number is 9876543210.",
+      "level": "medium"
+    },
+    {
+      "word": "name",
+      "meaning": "word used to call a person or thing",
+      "example": "What is your name?",
+      "level": "medium"
+    },
+    {
+      "word": "question",
+      "meaning": "something you ask to get answer",
+      "example": "I have a question for you.",
+      "level": "medium"
+    },
+    {
+      "word": "answer",
+      "meaning": "reply to a question",
+      "example": "What is the answer?",
+      "level": "medium"
+    },
+    {
+      "word": "problem",
+      "meaning": "something difficult that needs solving",
+      "example": "We have a small problem.",
+      "level": "medium"
+    },
+    {
+      "word": "idea",
+      "meaning": "thought or plan",
+      "example": "That's a good idea!",
+      "level": "medium"
+    },
+    {
+      "word": "plan",
+      "meaning": "arrangement for future action",
+      "example": "We made a plan for vacation.",
+      "level": "medium"
+    },
+    {
+      "word": "travel",
+      "meaning": "to go from one place to another",
+      "example": "I travel by train often.",
+      "level": "medium"
+    },
+    {
+      "word": "visit",
+      "meaning": "to go see a person or place",
+      "example": "I visit my grandparents every month.",
+      "level": "medium"
+    },
+    {
+      "word": "happy",
+      "meaning": "feeling good or pleased",
+      "example": "She felt happy when she saw her friend.",
+      "level": "easy"
+    },
+    {
+      "word": "sad",
+      "meaning": "feeling unhappy",
+      "example": "He was sad because it started to rain.",
+      "level": "easy"
+    },
+    {
+      "word": "big",
+      "meaning": "large in size",
+      "example": "They live in a big house.",
+      "level": "easy"
+    },
+    {
+      "word": "small",
+      "meaning": "little in size",
+      "example": "I have a small cat.",
+      "level": "easy"
+    },
+    {
+      "word": "fast",
+      "meaning": "moving quickly",
+      "example": "The car is very fast.",
+      "level": "easy"
+    },
+    {
+      "word": "slow",
+      "meaning": "not moving quickly",
+      "example": "The turtle is slow.",
+      "level": "easy"
+    },
+    {
+      "word": "hot",
+      "meaning": "having a high temperature",
+      "example": "The soup is hot.",
+      "level": "easy"
+    },
+    {
+      "word": "cold",
+      "meaning": "having a low temperature",
+      "example": "The ice cream is cold.",
+      "level": "easy"
+    },
+    {
+      "word": "eat",
+      "meaning": "to put food into your mouth",
+      "example": "I eat breakfast every morning.",
+      "level": "easy"
+    },
+    {
+      "word": "drink",
+      "meaning": "to take liquid into your mouth",
+      "example": "Please drink some water.",
+      "level": "easy"
+    },
+    {
+      "word": "sleep",
+      "meaning": "to rest with your eyes closed",
+      "example": "The baby likes to sleep.",
+      "level": "easy"
+    },
+    {
+      "word": "walk",
+      "meaning": "to move on your feet",
+      "example": "We walk to the park.",
+      "level": "easy"
+    },
+    {
+      "word": "run",
+      "meaning": "to move very fast on your feet",
+      "example": "He can run fast.",
+      "level": "easy"
+    },
+    {
+      "word": "talk",
+      "meaning": "to speak with someone",
+      "example": "They talk on the phone.",
+      "level": "easy"
+    },
+    {
+      "word": "listen",
+      "meaning": "to pay attention to sound",
+      "example": "Please listen to the teacher.",
+      "level": "easy"
+    },
+    {
+      "word": "read",
+      "meaning": "to look at and understand words",
+      "example": "I read a book at night.",
+      "level": "easy"
+    },
+    {
+      "word": "write",
+      "meaning": "to put words on paper",
+      "example": "She writes a letter to her mom.",
+      "level": "easy"
+    },
+    {
+      "word": "work",
+      "meaning": "to do a job or task",
+      "example": "My father works in an office.",
+      "level": "easy"
+    },
+    {
+      "word": "play",
+      "meaning": "to have fun",
+      "example": "The children play outside.",
+      "level": "easy"
+    },
+    {
+      "word": "buy",
+      "meaning": "to get something with money",
+      "example": "I want to buy a new phone.",
+      "level": "easy"
+    },
+    {
+      "word": "sell",
+      "meaning": "to give something for money",
+      "example": "They sell fruits at the market.",
+      "level": "easy"
+    },
+    {
+      "word": "help",
+      "meaning": "to make something easier for someone",
+      "example": "Can you help me carry this?",
+      "level": "easy"
+    },
+    {
+      "word": "clean",
+      "meaning": "to make something free of dirt",
+      "example": "Please clean your room.",
+      "level": "easy"
+    },
+    {
+      "word": "cook",
+      "meaning": "to prepare food with heat",
+      "example": "My mom cooks dinner every day.",
+      "level": "easy"
+    },
+    {
+      "word": "drive",
+      "meaning": "to operate a car or vehicle",
+      "example": "He drives to work.",
+      "level": "medium"
+    },
+    {
+      "word": "wait",
+      "meaning": "to stay until something happens",
+      "example": "Please wait for me.",
+      "level": "easy"
+    },
+    {
+      "word": "open",
+      "meaning": "to move something so it is not closed",
+      "example": "Open the door, please.",
+      "level": "easy"
+    },
+    {
+      "word": "close",
+      "meaning": "to move something so it is shut",
+      "example": "Close the window.",
+      "level": "easy"
+    },
+    {
+      "word": "start",
+      "meaning": "to begin",
+      "example": "The movie starts at 7 PM.",
+      "level": "easy"
+    },
+    {
+      "word": "finish",
+      "meaning": "to complete",
+      "example": "I finish my homework.",
+      "level": "easy"
+    },
+    {
+      "word": "happy",
+      "meaning": "feeling joy",
+      "example": "She has a happy smile.",
+      "level": "easy"
+    },
+    {
+      "word": "angry",
+      "meaning": "feeling strong annoyance",
+      "example": "He was angry about the delay.",
+      "level": "easy"
+    },
+    {
+      "word": "tired",
+      "meaning": "needing sleep or rest",
+      "example": "I am very tired after work.",
+      "level": "easy"
+    },
+    {
+      "word": "early",
+      "meaning": "before the usual time",
+      "example": "She wakes up early.",
+      "level": "easy"
+    },
+    {
+      "word": "late",
+      "meaning": "after the usual time",
+      "example": "The bus is late.",
+      "level": "easy"
+    },
+    {
+      "word": "easy",
+      "meaning": "not difficult",
+      "example": "This test is easy.",
+      "level": "easy"
+    },
+    {
+      "word": "hard",
+      "meaning": "difficult",
+      "example": "That question is hard.",
+      "level": "easy"
+    },
+    {
+      "word": "new",
+      "meaning": "not old",
+      "example": "I bought a new bag.",
+      "level": "easy"
+    },
+    {
+      "word": "old",
+      "meaning": "having existed for a long time",
+      "example": "This is an old building.",
+      "level": "easy"
+    },
+    {
+      "word": "good",
+      "meaning": "of high quality or pleasant",
+      "example": "This is a good movie.",
+      "level": "easy"
+    },
+    {
+      "word": "bad",
+      "meaning": "of low quality or unpleasant",
+      "example": "The weather is bad today.",
+      "level": "easy"
+    },
+    {
+      "word": "cheap",
+      "meaning": "low in price",
+      "example": "These shoes are cheap.",
+      "level": "easy"
+    },
+    {
+      "word": "expensive",
+      "meaning": "high in price",
+      "example": "That watch is expensive.",
+      "level": "medium"
+    },
+    {
+      "word": "rich",
+      "meaning": "having a lot of money",
+      "example": "He is a rich businessman.",
+      "level": "easy"
+    },
+    {
+      "word": "poor",
+      "meaning": "having very little money",
+      "example": "They help poor families.",
+      "level": "easy"
+    },
+    {
+      "word": "strong",
+      "meaning": "having great physical power",
+      "example": "He is very strong.",
+      "level": "easy"
+    },
+    {
+      "word": "weak",
+      "meaning": "lacking strength",
+      "example": "She felt weak after being sick.",
+      "level": "easy"
+    },
+    {
+      "word": "clean",
+      "meaning": "not dirty",
+      "example": "The kitchen is clean.",
+      "level": "easy"
+    },
+    {
+      "word": "dirty",
+      "meaning": "covered with dirt",
+      "example": "Your hands are dirty.",
+      "level": "easy"
+    },
+    {
+      "word": "full",
+      "meaning": "containing as much as possible",
+      "example": "The glass is full of water.",
+      "level": "easy"
+    },
+    {
+      "word": "empty",
+      "meaning": "containing nothing",
+      "example": "The bottle is empty.",
+      "level": "easy"
+    },
+    {
+      "word": "light",
+      "meaning": "not heavy",
+      "example": "This bag is very light.",
+      "level": "easy"
+    },
+    {
+      "word": "heavy",
+      "meaning": "weighing a lot",
+      "example": "The box is too heavy.",
+      "level": "easy"
+    },
+    {
+      "word": "safe",
+      "meaning": "not dangerous",
+      "example": "This neighborhood is safe.",
+      "level": "easy"
+    },
+    {
+      "word": "dangerous",
+      "meaning": "likely to cause harm",
+      "example": "The storm is dangerous.",
+      "level": "medium"
+    },
+    {
+      "word": "quiet",
+      "meaning": "making little noise",
+      "example": "Please be quiet.",
+      "level": "easy"
+    },
+    {
+      "word": "loud",
+      "meaning": "making a lot of noise",
+      "example": "The music is too loud.",
+      "level": "easy"
+    },
+    {
+      "word": "soft",
+      "meaning": "pleasant to touch, not hard",
+      "example": "The pillow is soft.",
+      "level": "easy"
+    },
+    {
+      "word": "hard",
+      "meaning": "firm and solid",
+      "example": "The table is made of hard wood.",
+      "level": "easy"
+    },
+    {
+      "word": "wet",
+      "meaning": "covered with liquid",
+      "example": "My hair is wet.",
+      "level": "easy"
+    },
+    {
+      "word": "dry",
+      "meaning": "not wet",
+      "example": "The clothes are dry.",
+      "level": "easy"
+    },
+    {
+      "word": "near",
+      "meaning": "close to something",
+      "example": "The school is near my house.",
+      "level": "easy"
+    },
+    {
+      "word": "far",
+      "meaning": "a long distance away",
+      "example": "The station is far from here.",
+      "level": "easy"
+    },
+    {
+      "word": "right",
+      "meaning": "correct or the direction",
+      "example": "Turn right at the corner.",
+      "level": "easy"
+    },
+    {
+      "word": "wrong",
+      "meaning": "not correct",
+      "example": "That answer is wrong.",
+      "level": "easy"
+    },
+    {
+      "word": "ask",
+      "meaning": "to say something to get an answer",
+      "example": "Ask the teacher for help.",
+      "level": "easy"
+    },
+    {
+      "word": "answer",
+      "meaning": "to reply",
+      "example": "Please answer the question.",
+      "level": "easy"
+    },
+    {
+      "word": "call",
+      "meaning": "to phone someone",
+      "example": "I will call you later.",
+      "level": "easy"
+    },
+    {
+      "word": "forget",
+      "meaning": "to not remember",
+      "example": "Don't forget your keys.",
+      "level": "easy"
+    },
+    {
+      "word": "remember",
+      "meaning": "to bring back to mind",
+      "example": "I remember your name.",
+      "level": "easy"
+    },
+    {
+      "word": "understand",
+      "meaning": "to know the meaning",
+      "example": "Do you understand the lesson?",
+      "level": "medium"
+    },
+    {
+      "word": "think",
+      "meaning": "to have an idea or opinion",
+      "example": "I think it will rain.",
+      "level": "easy"
+    },
+    {
+      "word": "know",
+      "meaning": "to have information",
+      "example": "I know the answer.",
+      "level": "easy"
+    },
+    {
+      "word": "believe",
+      "meaning": "to feel sure something is true",
+      "example": "I believe you.",
+      "level": "medium"
+    },
+    {
+      "word": "hope",
+      "meaning": "to want something to happen",
+      "example": "I hope you feel better.",
+      "level": "easy"
+    },
+    {
+      "word": "need",
+      "meaning": "to require something",
+      "example": "I need some water.",
+      "level": "easy"
+    },
+    {
+      "word": "want",
+      "meaning": "to desire something",
+      "example": "She wants a new dress.",
+      "level": "easy"
+    },
+    {
+      "word": "like",
+      "meaning": "to enjoy something",
+      "example": "I like pizza.",
+      "level": "easy"
+    },
+    {
+      "word": "love",
+      "meaning": "to have strong feelings for",
+      "example": "I love my family.",
+      "level": "easy"
+    },
+    {
+      "word": "hate",
+      "meaning": "to strongly dislike",
+      "example": "He hates waiting.",
+      "level": "easy"
+    },
+    {
+      "word": "give",
+      "meaning": "to hand something to someone",
+      "example": "Please give me the pen.",
+      "level": "easy"
+    },
+    {
+      "word": "take",
+      "meaning": "to get hold of something",
+      "example": "Take an umbrella with you.",
+      "level": "easy"
+    },
+    {
+      "word": "bring",
+      "meaning": "to carry something to a place",
+      "example": "Bring your book tomorrow.",
+      "level": "easy"
+    },
+    {
+      "word": "send",
+      "meaning": "to cause something to go somewhere",
+      "example": "I will send you an email.",
+      "level": "medium"
+    },
+    {
+      "word": "receive",
+      "meaning": "to get something that is given",
+      "example": "Did you receive my message?",
+      "level": "medium"
+    },
+    {
+      "word": "keep",
+      "meaning": "to have and not give back",
+      "example": "You can keep the change.",
+      "level": "easy"
+    },
+    {
+      "word": "lose",
+      "meaning": "to not know where something is",
+      "example": "Don't lose your ticket.",
+      "level": "easy"
+    },
+    {
+      "word": "find",
+      "meaning": "to discover or locate",
+      "example": "I need to find my keys.",
+      "level": "easy"
+    },
+    {
+      "word": "leave",
+      "meaning": "to go away from",
+      "example": "What time will you leave?",
+      "level": "easy"
+    },
+    {
+      "word": "arrive",
+      "meaning": "to reach a place",
+      "example": "The train will arrive soon.",
+      "level": "medium"
+    },
+    {
+      "word": "enter",
+      "meaning": "to go into",
+      "example": "Please enter the room quietly.",
+      "level": "medium"
+    },
+    {
+      "word": "exit",
+      "meaning": "to go out of",
+      "example": "Exit the building calmly.",
+      "level": "medium"
+    },
+    {
+      "word": "push",
+      "meaning": "to move something away",
+      "example": "Push the door to open it.",
+      "level": "easy"
+    },
+    {
+      "word": "pull",
+      "meaning": "to move something towards you",
+      "example": "Pull the handle to open.",
+      "level": "easy"
+    },
+    {
+      "word": "break",
+      "meaning": "to separate into pieces",
+      "example": "Be careful not to break the glass.",
+      "level": "easy"
+    },
+    {
+      "word": "fix",
+      "meaning": "to repair something",
+      "example": "Can you fix my bike?",
+      "level": "medium"
+    },
+    {
+      "word": "build",
+      "meaning": "to make something by putting parts together",
+      "example": "They build houses in this area.",
+      "level": "medium"
+    },
+    {
+      "word": "grow",
+      "meaning": "to become larger",
+      "example": "Plants grow in the sun.",
+      "level": "easy"
+    },
+    {
+      "word": "change",
+      "meaning": "to become different",
+      "example": "The weather can change quickly.",
+      "level": "medium"
+    }
+  ]
+}
