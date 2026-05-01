@@ -4,11 +4,12 @@ import { useSpeech } from '@/hooks/useSpeech';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
 import { useUserActions } from '@/hooks/useUserActions';
 import { useVocabulary } from '@/hooks/useVocabulary';
-import { useNavigation } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
+import { Button } from 'react-native-paper';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -23,7 +24,7 @@ import { VocabularyCard } from '../components/vocabulary/VocabularyCard';
 
 export default function Index() {
   const { backgroundColor } = useBackgroundColor();
-  const { current, index, isAnimating, nextWord, prevWord, progress, total } = useVocabulary();
+  const { current, index, isAnimating, nextWord, prevWord, progress, total, loading } = useVocabulary();
   const { speakWord, speakMeaning, speakFull } = useSpeech();
   const { isFavorited, isBookmarked, heartScale, bookmarkScale, toggleFavorite, toggleBookmark, shareWord } = useUserActions();
 
@@ -31,6 +32,10 @@ export default function Index() {
   const [currentItem, setCurrentItem] = useState(current);
   const cardOpacity = useSharedValue(1);
   const navigation = useNavigation();
+
+  // Add after the useState declarations
+  const hasEnoughData = total > 1;
+  const isSingleItem = total === 1;
 
 
   // Update current item when vocabulary changes
@@ -45,7 +50,7 @@ export default function Index() {
   }, [current]);
 
   const handleNext = () => {
-    if (isTransitioning.current || isAnimating) return;
+    if (isTransitioning.current || isAnimating || !hasEnoughData) return;
     isTransitioning.current = true;
     cardOpacity.value = withTiming(0, { duration: 200 });
     setTimeout(() => {
@@ -55,7 +60,7 @@ export default function Index() {
   };
 
   const handlePrev = () => {
-    if (isTransitioning.current || isAnimating) return;
+    if (isTransitioning.current || isAnimating || !hasEnoughData) return;
     isTransitioning.current = true;
     cardOpacity.value = withTiming(0, { duration: 200 });
     setTimeout(() => {
@@ -67,7 +72,7 @@ export default function Index() {
   const { gesture, translateY } = useSwipeGesture({
     onSwipeUp: handleNext,
     onSwipeDown: handlePrev,
-    isEnabled: !isAnimating && !!currentItem
+    isEnabled: !isAnimating && !!currentItem && hasEnoughData
   });
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -105,6 +110,61 @@ export default function Index() {
 
   if (!currentItem?.word || !currentItem?.meaning) return null;
 
+  // Loading state
+  if (loading) {
+    return (
+      <View style={[styles.container, { backgroundColor: backgroundColor.color, justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={{ color: '#fff', fontSize: 18 }}>Loading vocabulary...</Text>
+      </View>
+    );
+  }
+
+  // Empty state - no vocabulary items
+  if (!currentItem && total === 0) {
+    return (
+      <View style={[styles.container, { backgroundColor: backgroundColor.color, justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={{ color: '#fff', fontSize: 18, marginBottom: 20 }}>No vocabulary items found</Text>
+        <Button mode="contained" onPress={() => router.push('/add-vocabulary')}>
+          Add Your First Word
+        </Button>
+      </View>
+    );
+  }
+
+  // Single item state
+  if (isSingleItem && currentItem) {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={[styles.container, { backgroundColor: backgroundColor.color }]}>
+          <StatusBar style="light" />
+
+          <VocabularyCard
+            key={currentItem.id}
+            item={currentItem}
+            selectedTheme={backgroundColor}
+            onSpeakWord={() => speakWord(currentItem.word)}
+            onSpeakMeaning={() => speakMeaning(currentItem.meaning)}
+            onSpeakFull={() => speakFull(currentItem.word, currentItem.meaning)}
+          />
+
+          <View style={styles.bottomControls}>
+            <ActionButtons
+              isFavorited={isFavorited}
+              isBookmarked={isBookmarked}
+              heartScale={heartScale}
+              bookmarkScale={bookmarkScale}
+              onLike={toggleFavorite}
+              onBookmark={toggleBookmark}
+              onShare={() => shareWord(currentItem.word, currentItem.meaning)}
+            />
+            <ProgressIndicator current={1} total={1} progress={100} />
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  // Normal state with multiple items
   return (
     <View style={{ flex: 1 }}>
       <GestureDetector gesture={gesture}>
@@ -132,10 +192,10 @@ export default function Index() {
               onBookmark={toggleBookmark}
               onShare={() => shareWord(currentItem.word, currentItem.meaning)}
             />
-            <ProgressIndicator current={index} total={total} progress={progress} />
+            <ProgressIndicator current={index + 1} total={total} progress={progress} />
           </View>
 
-          <SwipeHint />
+          {hasEnoughData && <SwipeHint />}
         </View>
       </GestureDetector>
     </View>
