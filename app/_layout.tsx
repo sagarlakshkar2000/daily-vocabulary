@@ -59,7 +59,7 @@ function LayoutContent() {
             ),
           }}
         />
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="favorites"
           options={{
             title: "Favorites",
@@ -104,7 +104,7 @@ function LayoutContent() {
               <Ionicons name="flask" size={size} color={color} />
             ),
           }}
-        />
+        /> */}
       </Drawer>
 
       <SettingsButton onPress={openPicker} />
