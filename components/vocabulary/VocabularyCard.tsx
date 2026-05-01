@@ -14,15 +14,21 @@ import Animated, {
   withTiming
 } from 'react-native-reanimated';
 
-const { width } = Dimensions.get('window');
+import type { AnimatedStyle } from 'react-native-reanimated';
+
 
 interface VocabularyCardProps {
   selectedTheme: { name: string, color: string, gradient: [string, string], text: string };
   item: VocabItem;
-  animatedStyle: any;
+  animatedStyle: AnimatedStyle;
 }
 
-export const VocabularyCard: React.FC<VocabularyCardProps> = ({
+const { width, height } = Dimensions.get('window');
+const CARD_WIDTH = Math.min(width * 0.85, 400);
+const CARD_HEIGHT = Math.min(height * 0.65, 600);
+
+
+export const VocabularyCard = React.memo<VocabularyCardProps>(({
   selectedTheme,
   item,
   animatedStyle,
@@ -33,10 +39,9 @@ export const VocabularyCard: React.FC<VocabularyCardProps> = ({
   const rippleOpacity = useSharedValue(0);
 
   useEffect(() => {
-    return () => {
-      Speech.stop();
-    };
-  }, []);
+    Speech.stop();
+    setIsPlaying(false);
+  }, [item]);
 
   const playHaptic = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -50,13 +55,16 @@ export const VocabularyCard: React.FC<VocabularyCardProps> = ({
       return;
     }
 
+    if (!item?.word || !item?.meaning) return; // safety
+
+    setIsPlaying(true);
+
     // Ripple animation
     rippleScale.value = withSpring(1, { damping: 10, stiffness: 100 });
-    rippleOpacity.value = withTiming(0.3, { duration: 300 });
-    setTimeout(() => {
+    rippleOpacity.value = withTiming(0.3, { duration: 300 }, () => {
       rippleScale.value = 0;
       rippleOpacity.value = 0;
-    }, 400);
+    });
 
     const textToSpeak = `${item.word}. ${item.meaning}`;
     playHaptic();
@@ -96,8 +104,16 @@ export const VocabularyCard: React.FC<VocabularyCardProps> = ({
   }));
 
   return (
-    <Animated.View style={[styles.wrapper, animatedStyle]}>
-      <Card style={{ ...styles.card, borderColor: selectedTheme.color }} elevation={0}>
+    <Animated.View style={[styles.wrapper, animatedStyle] as any}>
+      <Card
+        elevation={0}
+        style={{
+          ...styles.card,
+          borderColor: selectedTheme.color,
+          width: CARD_WIDTH,
+          height: CARD_HEIGHT,
+        }}
+      >
         <LinearGradient
           colors={[selectedTheme.color, '#F8F9FA']}
           start={{ x: 0, y: 0 }}
@@ -161,7 +177,7 @@ export const VocabularyCard: React.FC<VocabularyCardProps> = ({
             {item.example && (
               <View style={styles.exampleSection}>
                 <View style={styles.exampleHeader}>
-                  <Ionicons name="quote" size={16} color="#C6C6C8" />
+                  <Ionicons name="chatbubble" size={16} color="#C6C6C8" />
                   <Text style={styles.exampleLabel}>Example</Text>
                 </View>
                 <Text style={styles.exampleText}>{item.example}</Text>
@@ -172,13 +188,13 @@ export const VocabularyCard: React.FC<VocabularyCardProps> = ({
       </Card>
     </Animated.View>
   );
-};
+});
 
 const styles = {
   wrapper: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'center' as const,
+    alignItems: 'center' as const,
     width: '100%',
     paddingHorizontal: 20,
   },
@@ -204,7 +220,7 @@ const styles = {
     gap: 32,
   },
   header: {
-    alignItems: 'center',
+    alignItems: 'center' as const,
     gap: 16,
   },
   badge: {
@@ -216,21 +232,21 @@ const styles = {
   },
   badgeText: {
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '600' as const,
     letterSpacing: 1,
     color: '#8E8E93',
   },
   word: {
     fontSize: 44,
-    fontWeight: '600',
-    textAlign: 'center',
+    fontWeight: '600' as const,
+    textAlign: 'center' as const,
     color: '#000000',
     letterSpacing: -0.5,
     lineHeight: 52,
   },
   phoneticRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
     gap: 6,
     backgroundColor: '#F2F2F7',
     paddingHorizontal: 12,
@@ -240,21 +256,21 @@ const styles = {
   phonetic: {
     fontSize: 14,
     color: '#8E8E93',
-    fontWeight: '500',
+    fontWeight: '500' as const,
   },
   audioSection: {
-    alignItems: 'center',
+    alignItems: 'center' as const,
     gap: 12,
   },
   audioButtonWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
   },
   audioButton: {
     width: 72,
     height: 72,
     borderRadius: 36,
-    overflow: 'hidden',
+    overflow: 'hidden' as const,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
@@ -263,20 +279,21 @@ const styles = {
   },
   audioGradient: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'center' as const,
+    alignItems: 'center' as const,
   },
   ripple: {
-    position: 'absolute',
+    position: 'absolute' as const,
     width: 72,
     height: 72,
     borderRadius: 36,
     backgroundColor: '#1A1A1A',
+    pointerEvents: 'none' as const,
   },
   audioHint: {
     fontSize: 13,
     color: '#8E8E93',
-    fontWeight: '500',
+    fontWeight: '500' as const,
     letterSpacing: 0.3,
   },
   divider: {
@@ -289,38 +306,38 @@ const styles = {
   },
   meaningLabel: {
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: '600' as const,
     letterSpacing: 1,
     color: '#8E8E93',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as const,
   },
   meaning: {
     fontSize: 18,
     lineHeight: 28,
     color: '#1C1C1E',
-    fontWeight: '500',
+    fontWeight: '500' as const,
   },
   exampleSection: {
     gap: 12,
     paddingTop: 8,
   },
   exampleHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
     gap: 8,
   },
   exampleLabel: {
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: '600' as const,
     letterSpacing: 1,
     color: '#8E8E93',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as const,
   },
   exampleText: {
     fontSize: 16,
     lineHeight: 26,
     color: '#3A3A3C',
-    fontStyle: 'italic',
+    fontStyle: 'italic' as const,
     letterSpacing: 0.2,
   },
 };

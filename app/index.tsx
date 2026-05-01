@@ -5,10 +5,16 @@ import { useSwipeGesture } from '@/hooks/useSwipeGesture';
 import { useUserActions } from '@/hooks/useUserActions';
 import { useVocabulary } from '@/hooks/useVocabulary';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
-import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming
+} from 'react-native-reanimated';
 import { ActionButtons } from '../components/vocabulary/ActionButtons';
 import { ProgressIndicator } from '../components/vocabulary/ProgressIndicator';
 import { SwipeHint } from '../components/vocabulary/SwipeHint';
@@ -17,90 +23,84 @@ import { VocabularyCard } from '../components/vocabulary/VocabularyCard';
 export default function Index() {
   const { backgroundColor } = useBackgroundColor();
   const { current, index, isAnimating, nextWord, prevWord, progress, total } = useVocabulary();
-
   const { speakWord, speakMeaning, speakFull } = useSpeech();
+  const { isFavorited, isBookmarked, heartScale, bookmarkScale, toggleFavorite, toggleBookmark, shareWord } = useUserActions();
 
-  const {
-    isFavorited,
-    isBookmarked,
-    heartScale,
-    bookmarkScale,
-    toggleFavorite,
-    toggleBookmark,
-    shareWord,
-  } = useUserActions();
+  const isTransitioning = useRef(false);
+  const [currentItem, setCurrentItem] = useState(current);
+  const cardOpacity = useSharedValue(1);
 
-  // ✅ Prevent multiple fast swipes
-  const isTransitioning = React.useRef(false);
+  // Update current item when vocabulary changes
+  useEffect(() => {
+    if (current) {
+      // Small delay to allow exit animation to complete
+      setTimeout(() => {
+        setCurrentItem(current);
+        cardOpacity.value = withTiming(1, { duration: 300 });
+      }, 250);
+    }
+  }, [current]);
 
-  const handleNext = React.useCallback(() => {
+  const handleNext = () => {
     if (isTransitioning.current || isAnimating) return;
-
     isTransitioning.current = true;
-    nextWord();
-
-    requestAnimationFrame(() => {
-      isTransitioning.current = false;
-    });
-  }, [nextWord, isAnimating]);
-
-  const handlePrev = React.useCallback(() => {
-    if (isTransitioning.current) return;
-    isTransitioning.current = true;
-
-    prevWord();
-
+    cardOpacity.value = withTiming(0, { duration: 200 });
     setTimeout(() => {
+      nextWord();
       isTransitioning.current = false;
-    }, 350);
-  }, [prevWord, isAnimating]);
+    }, 200);
+  };
+
+  const handlePrev = () => {
+    if (isTransitioning.current || isAnimating) return;
+    isTransitioning.current = true;
+    cardOpacity.value = withTiming(0, { duration: 200 });
+    setTimeout(() => {
+      prevWord();
+      isTransitioning.current = false;
+    }, 200);
+  };
 
   const { gesture, translateY } = useSwipeGesture({
     onSwipeUp: handleNext,
     onSwipeDown: handlePrev,
-    isEnabled: !isAnimating && !!current
+    isEnabled: !isAnimating && !!currentItem
   });
 
-  // ✅ Safe animation
   const animatedStyle = useAnimatedStyle(() => {
-    const clampedY = Math.max(
-      -SCREEN_HEIGHT / 3,
-      Math.min(translateY.value, SCREEN_HEIGHT / 3)
+    // Card follows finger with 3D effect
+    const rotateX = interpolate(
+      translateY.value,
+      [-SCREEN_HEIGHT, 0, SCREEN_HEIGHT],
+      [-15, 0, 15],
+      Extrapolate.CLAMP
     );
 
     const scale = interpolate(
-      Math.abs(clampedY),
-      [0, SCREEN_HEIGHT / 3],
-      [1, 0.9],
+      Math.abs(translateY.value),
+      [0, SCREEN_HEIGHT / 2],
+      [1, 0.85],
       Extrapolate.CLAMP
     );
 
     const opacity = interpolate(
-      Math.abs(clampedY),
-      [0, SCREEN_HEIGHT / 3],
-      [1, 0.7],
-      Extrapolate.CLAMP
-    );
-
-    const rotateX = interpolate(
-      clampedY,
-      [-SCREEN_HEIGHT / 3, 0, SCREEN_HEIGHT / 3],
-      [-10, 0, 10],
+      Math.abs(translateY.value),
+      [0, SCREEN_HEIGHT / 2],
+      [1, 0],
       Extrapolate.CLAMP
     );
 
     return {
       transform: [
-        { translateY: clampedY },
+        { translateY: translateY.value },
         { scale },
         { rotateX: `${rotateX}deg` },
       ],
-      opacity,
+      opacity: opacity * cardOpacity.value,
     };
   });
 
-  // ✅ Safe guard
-  if (!current?.word || !current?.meaning) return null;
+  if (!currentItem?.word || !currentItem?.meaning) return null;
 
   return (
     <View style={{ flex: 1 }}>
@@ -110,11 +110,12 @@ export default function Index() {
 
           <Animated.View style={animatedStyle}>
             <VocabularyCard
-              item={current}
+              key={currentItem.id}
+              item={currentItem}
               selectedTheme={backgroundColor}
-              onSpeakWord={() => speakWord(current.word)}
-              onSpeakMeaning={() => speakMeaning(current.meaning)}
-              onSpeakFull={() => speakFull(current.word, current.meaning)}
+              onSpeakWord={() => speakWord(currentItem.word)}
+              onSpeakMeaning={() => speakMeaning(currentItem.meaning)}
+              onSpeakFull={() => speakFull(currentItem.word, currentItem.meaning)}
             />
           </Animated.View>
 
@@ -126,14 +127,9 @@ export default function Index() {
               bookmarkScale={bookmarkScale}
               onLike={toggleFavorite}
               onBookmark={toggleBookmark}
-              onShare={() => shareWord(current.word, current.meaning)}
+              onShare={() => shareWord(currentItem.word, currentItem.meaning)}
             />
-
-            <ProgressIndicator
-              current={index}
-              total={total}
-              progress={progress}
-            />
+            <ProgressIndicator current={index} total={total} progress={progress} />
           </View>
 
           <SwipeHint />

@@ -1,9 +1,12 @@
-// hooks/useSwipeGesture.ts
 import { SCREEN_HEIGHT, SWIPE_CONFIG } from '@/constants/styles';
 import * as Haptics from 'expo-haptics';
-import { useCallback } from 'react';
 import { Gesture } from 'react-native-gesture-handler';
-import { runOnJS, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import {
+  runOnJS,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 
 interface UseSwipeGestureProps {
   onSwipeUp: () => void;
@@ -11,45 +14,69 @@ interface UseSwipeGestureProps {
   isEnabled: boolean;
 }
 
-export const useSwipeGesture = ({ onSwipeUp, onSwipeDown, isEnabled }: UseSwipeGestureProps) => {
-  const translateY = useSharedValue(0);
-
-  const resetPosition = useCallback(() => {
-    translateY.value = withSpring(0, {
-      damping: SWIPE_CONFIG.DAMPING,
-      stiffness: SWIPE_CONFIG.STIFFNESS,
-    });
-  }, [translateY]);
-
-  const handleSwipe = useCallback((translationY: number) => {
-    if (!isEnabled) return;
-
-    if (translationY < -SWIPE_CONFIG.THRESHOLD) {
-      translateY.value = withTiming(-SCREEN_HEIGHT, { duration: SWIPE_CONFIG.DURATION }, () => {
-        runOnJS(onSwipeUp)();
-        translateY.value = 0;
-      });
-      runOnJS(Haptics.impactAsync)(Haptics.ImpactFeedbackStyle.Medium);
-    }
-    else if (translationY > SWIPE_CONFIG.THRESHOLD) {
-      translateY.value = withTiming(SCREEN_HEIGHT, { duration: SWIPE_CONFIG.DURATION }, () => {
-        runOnJS(onSwipeDown)();
-        translateY.value = 0;
-      });
-      runOnJS(Haptics.impactAsync)(Haptics.ImpactFeedbackStyle.Medium);
-    }
-    else {
-      resetPosition();
-    }
-  }, [isEnabled, onSwipeUp, onSwipeDown, translateY, resetPosition]);
+export const useSwipeGesture = ({
+  onSwipeUp,
+  onSwipeDown,
+  isEnabled,
+}: UseSwipeGestureProps) => {
+  const translateY = useSharedValue<number>(0);
+  const isAnimating = useSharedValue<boolean>(false);
 
   const gesture = Gesture.Pan()
+    .enabled(isEnabled)
     .onUpdate((event) => {
-      if (!isEnabled) return;
-      translateY.value = event.translationY * 0.5;
+      if (isAnimating.value) return;
+      // Follow finger with slight resistance
+      translateY.value = event.translationY * 0.3;
     })
     .onEnd((event) => {
-      handleSwipe(event.translationY);
+      if (isAnimating.value) return;
+
+      const { translationY, velocityY } = event;
+
+      const shouldSwipeUp =
+        translationY < -SWIPE_CONFIG.THRESHOLD || velocityY < -400;
+
+      const shouldSwipeDown =
+        translationY > SWIPE_CONFIG.THRESHOLD || velocityY > 400;
+
+      if (shouldSwipeUp) {
+        isAnimating.value = true;
+
+        // Animate card completely out UP
+        translateY.value = withTiming(-SCREEN_HEIGHT, {
+          duration: 30,
+        }, () => {
+          runOnJS(onSwipeUp)();
+          // Reset position for next card
+          translateY.value = withSpring(0, { damping: 30, stiffness: 80 });
+          isAnimating.value = false;
+        });
+
+        runOnJS(Haptics.impactAsync)(Haptics.ImpactFeedbackStyle.Light);
+
+      } else if (shouldSwipeDown) {
+        isAnimating.value = true;
+
+        // Animate card completely out DOWN
+        translateY.value = withTiming(SCREEN_HEIGHT, {
+          duration: 30,
+        }, () => {
+          runOnJS(onSwipeDown)();
+          // Reset position for next card
+          translateY.value = withSpring(0, { damping: 30, stiffness: 80 });
+          isAnimating.value = false;
+        });
+
+        runOnJS(Haptics.impactAsync)(Haptics.ImpactFeedbackStyle.Light);
+
+      } else {
+        // Return to center softly
+        translateY.value = withSpring(0, {
+          damping: 10,
+          stiffness: 100,
+        });
+      }
     });
 
   return { gesture, translateY };
