@@ -4,6 +4,7 @@ import { useSpeech } from '@/hooks/useSpeech';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
 import { useUserActions } from '@/hooks/useUserActions';
 import { useVocabulary } from '@/hooks/useVocabulary';
+import { useNavigation } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -29,6 +30,8 @@ export default function Index() {
   const isTransitioning = useRef(false);
   const [currentItem, setCurrentItem] = useState(current);
   const cardOpacity = useSharedValue(1);
+  const navigation = useNavigation();
+
 
   // Update current item when vocabulary changes
   useEffect(() => {
