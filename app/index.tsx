@@ -4,6 +4,7 @@ import { useSpeech } from '@/hooks/useSpeech';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
 import { useUserActions } from '@/hooks/useUserActions';
 import { useVocabulary } from '@/hooks/useVocabulary';
+import { syncWords } from '@/src/config/sync.service';
 import { router, useNavigation } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from 'react';
@@ -25,6 +26,7 @@ import { VocabularyCard } from '../components/vocabulary/VocabularyCard';
 export default function Index() {
   const { backgroundColor } = useBackgroundColor();
   const { current, index, isAnimating, nextWord, prevWord, progress, total, loading } = useVocabulary();
+  const vocab = useVocabulary();
   const { speakWord, speakMeaning, speakFull } = useSpeech();
   const { isFavorited, isBookmarked, heartScale, bookmarkScale, toggleFavorite, toggleBookmark, shareWord } = useUserActions();
 
@@ -37,6 +39,9 @@ export default function Index() {
   const hasEnoughData = total > 1;
   const isSingleItem = total === 1;
 
+  React.useEffect(() => {
+    syncWords();
+  }, []);
 
   // Update current item when vocabulary changes
   useEffect(() => {

@@ -1,16 +1,16 @@
 import { useBackgroundColor } from '@/contexts/BackgroundColorContext';
 import { db } from '@/src/config/firebase';
+import { insertManyWords, insertWord } from '@/src/config/vocabulary.service';
+import { VocabItem } from '@/types/vocabulary.types';
 import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
-import { addDoc, collection } from 'firebase/firestore';
+import * as FileSystem from 'expo-file-system/legacy';
+import { collection, doc, writeBatch } from 'firebase/firestore';
 import React, { useState } from 'react';
 import {
   Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
+  KeyboardAvoidingView, Platform, ScrollView,
   StyleSheet,
-  View,
+  View
 } from 'react-native';
 import {
   Button,
@@ -25,13 +25,6 @@ import {
 type VocabularyLevel = 'easy' | 'medium' | 'hard';
 type AddMethod = 'manual' | 'json';
 
-interface VocabularyItem {
-  word: string;
-  meaning: string;
-  example: string;
-  level: VocabularyLevel;
-  createdAt: Date;
-}
 
 const AddVocabulary = () => {
   const { backgroundColor } = useBackgroundColor();
@@ -45,7 +38,7 @@ const AddVocabulary = () => {
   const [loading, setLoading] = useState(false);
 
   // JSON upload state
-  const [jsonData, setJsonData] = useState<any[]>([]);
+  const [jsonData, setJsonData] = useState<Partial<VocabItem>[]>([]);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -72,16 +65,16 @@ const AddVocabulary = () => {
     return true;
   };
 
-  const saveToFirebase = async (data: VocabularyItem[]) => {
+  const saveToFirebase = async (data: VocabItem[]) => {
     try {
-      const batch = data.map(async (item) => {
-        const docRef = await addDoc(collection(db, 'vocabulary'), {
-          ...item,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-        return docRef;
+      const batch = writeBatch(db);
+
+      data.forEach(item => {
+        const ref = doc(collection(db, 'vocabulary'));
+        batch.set(ref, item);
       });
+
+      await batch.commit();
 
       await Promise.all(batch);
       return true;
@@ -96,7 +89,7 @@ const AddVocabulary = () => {
 
     setLoading(true);
     try {
-      const vocabularyItem: VocabularyItem = {
+      const vocabItem: VocabItem = {
         word: word.trim(),
         meaning: meaning.trim(),
         example: example.trim(),
@@ -104,7 +97,8 @@ const AddVocabulary = () => {
         createdAt: new Date(),
       };
 
-      await saveToFirebase([vocabularyItem]);
+      await saveToFirebase([vocabItem]);
+      insertWord(vocabItem);
 
       // Reset form
       setWord('');
@@ -127,33 +121,36 @@ const AddVocabulary = () => {
         copyToCacheDirectory: true,
       });
 
-      if (result.canceled) {
-        return;
-      }
+      if (result.canceled) return;
 
-      const file = result.assets[0];
-      const fileContent = await FileSystem.readAsStringAsync(file.uri);
-      const parsedData = JSON.parse(fileContent);
+      const asset = result.assets[0];
 
-      // Validate JSON structure
-      let vocabularyArray = Array.isArray(parsedData) ? parsedData : [parsedData];
+      // ✅ This works reliably with the legacy API
+      const content = await FileSystem.readAsStringAsync(asset.uri, {
+        encoding: FileSystem.EncodingType.UTF8
+      });
 
-      // Validate each item has required fields
-      const validItems = vocabularyArray.filter(item =>
-        item.word && item.meaning && item.example
+      const parsedData = JSON.parse(content);
+
+      const vocabularyArray = Array.isArray(parsedData)
+        ? parsedData
+        : [parsedData];
+
+      const validItems = vocabularyArray.filter(
+        item => item.word?.trim() && item.meaning?.trim()
       );
 
       if (validItems.length === 0) {
-        showMessage('Invalid JSON format. Each item must have word, meaning, and example.');
+        showMessage('Invalid JSON format');
         return;
       }
 
       setJsonData(validItems);
-      showMessage(`${validItems.length} vocabulary items loaded. Review and confirm to upload.`);
+      showMessage(`${validItems.length} items loaded`);
 
     } catch (error) {
-      showMessage('Error reading JSON file. Please check the format.');
-      console.error(error);
+      console.log(error);
+      showMessage('Error reading JSON file');
     }
   };
 
@@ -161,20 +158,27 @@ const AddVocabulary = () => {
     if (jsonData.length === 0) return;
 
     setLoading(true);
+
     try {
-      const vocabularyItems: VocabularyItem[] = jsonData.map(item => ({
+      const formattedData: VocabItem[] = jsonData.map(item => ({
         word: item.word,
         meaning: item.meaning,
         example: item.example || `${item.word} is used in context.`,
         level: item.level || 'medium',
+        phonetic: item.phonetic || '',
         createdAt: new Date(),
       }));
 
-      await saveToFirebase(vocabularyItems);
+      try {
+        await saveToFirebase(formattedData);
+        insertManyWords(formattedData);
+      } catch (error) {
+        // optional: retry or queue for sync
+      }
 
-      setJsonData([]);
-      showMessage(`${vocabularyItems.length} vocabulary items uploaded successfully!`);
+      showMessage(`${formattedData.length} vocabulary items uploaded successfully!`);
     } catch (error) {
+      console.log(error);
       showMessage('Error uploading vocabulary. Please try again.');
     } finally {
       setLoading(false);

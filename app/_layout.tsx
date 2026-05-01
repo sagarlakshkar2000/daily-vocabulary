@@ -2,9 +2,11 @@ import { ColorPickerModal } from "@/components/settings/ColorPickerModal";
 import { SettingsButton } from "@/components/settings/SettingsButton";
 import { BackgroundColorProvider, useBackgroundColor } from "@/contexts/BackgroundColorContext";
 import { useColorPicker } from "@/hooks/useColorPicker";
+import { initDB } from "@/src/config/database";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerContent } from "@react-navigation/drawer";
 import { Drawer } from "expo-router/drawer";
+import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider } from "react-native-paper";
 import 'react-native-reanimated';
@@ -12,6 +14,10 @@ import 'react-native-reanimated';
 function LayoutContent() {
   const { backgroundColor, setBackgroundColor } = useBackgroundColor();
   const { isVisible, openPicker, closePicker } = useColorPicker();
+
+  React.useEffect(() => {
+    initDB();
+  }, []);
 
   return (
     <>

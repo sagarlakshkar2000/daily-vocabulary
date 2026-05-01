@@ -8,7 +8,7 @@ export interface VocabItem {
   phonetic?: string;
   level?: string;
   createdAt: Date;
-  userId: string;
+  userId?: string;
 }
 
 export interface AnimationValues {
