@@ -3,7 +3,7 @@ import { COLORS } from '@/constants/styles';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import Animated, { SharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import { SharedValue, useAnimatedStyle } from 'react-native-reanimated';
 
 interface ActionButtonsProps {
   isFavorited: boolean;
@@ -34,7 +34,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   return (
     <View style={styles.container}>
-      <Animated.View style={heartAnimatedStyle}>
+      {/* <Animated.View style={heartAnimatedStyle}>
         <IconButton
           icon={isFavorited ? 'heart' : 'heart-outline'}
           iconColor={isFavorited ? COLORS.FAVORITE : COLORS.WHITE}
@@ -42,9 +42,9 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
           onPress={onLike}
           style={styles.button}
         />
-      </Animated.View>
+      </Animated.View> */}
 
-      <Animated.View style={bookmarkAnimatedStyle}>
+      {/* <Animated.View style={bookmarkAnimatedStyle}>
         <IconButton
           icon={isBookmarked ? 'bookmark' : 'bookmark-outline'}
           iconColor={isBookmarked ? COLORS.BOOKMARK : COLORS.WHITE}
@@ -52,7 +52,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
           onPress={onBookmark}
           style={styles.button}
         />
-      </Animated.View>
+      </Animated.View> */}
 
       <IconButton
         icon="share-variant"

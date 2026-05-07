@@ -40,7 +40,8 @@
           }
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -51,6 +52,7 @@
       "eas": {
         "projectId": "896c822a-44ed-4900-bf7b-6f769e2b0917"
       }
-    }
+    },
+    "owner": "sagarlakshkar740"
   }
 }

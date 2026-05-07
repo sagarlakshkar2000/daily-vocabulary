@@ -50,6 +50,7 @@ function LayoutContent() {
             ),
           }}
         />
+
         <Drawer.Screen
           name="add-vocabulary"
           options={{
@@ -59,37 +60,45 @@ function LayoutContent() {
             ),
           }}
         />
-        {/* <Drawer.Screen
+
+        <Drawer.Screen
           name="favorites"
           options={{
             title: "Favorites",
+            drawerItemStyle: { display: "none" },
             drawerIcon: ({ color, size }) => (
               <Ionicons name="heart" size={size} color={color} />
             ),
           }}
         />
+
         <Drawer.Screen
           name="bookmarks"
           options={{
             title: "Bookmarks",
+            drawerItemStyle: { display: "none" },
             drawerIcon: ({ color, size }) => (
               <Ionicons name="bookmark" size={size} color={color} />
             ),
           }}
         />
+
         <Drawer.Screen
           name="history"
           options={{
             title: "History",
+            drawerItemStyle: { display: "none" },
             drawerIcon: ({ color, size }) => (
               <Ionicons name="time" size={size} color={color} />
             ),
           }}
         />
+
         <Drawer.Screen
           name="settings"
           options={{
             title: "Settings",
+            drawerItemStyle: { display: "none" },
             drawerIcon: ({ color, size }) => (
               <Ionicons name="settings" size={size} color={color} />
             ),
@@ -100,11 +109,12 @@ function LayoutContent() {
           name="test-firebase"
           options={{
             title: "Test Firebase",
+            drawerItemStyle: { display: "none" },
             drawerIcon: ({ color, size }) => (
               <Ionicons name="flask" size={size} color={color} />
             ),
           }}
-        /> */}
+        />
       </Drawer>
 
       <SettingsButton onPress={openPicker} />
